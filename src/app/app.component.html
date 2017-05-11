@@ -1,0 +1,41 @@
+<!--<template #customItemTemplate let-model="item" let-index="index">
+      <h5>This is: {{model | json}} Index: {{ index }}</h5>
+    </template>-->
+
+
+
+<pre class="card card-block card-header"><h2>Введите Ваш вопрос</h2></pre>
+<!--<input [(ngModel)]="selected" [typeahead]="states" [typeaheadItemTemplate]="customItemTemplate" class="form-control">-->
+
+<br>
+
+<form #myForm="ngForm" novalidate>
+    <alert type="success">
+        <input class="form-control" placeholder="Введите вопрос в поле" name="Is" [(ngModel)]="Is" required>
+        <button type="button" class="btn btn-primary" [disabled]="myForm.invalid" (click)="addQuestion(Is)">Button</button>
+    </alert>
+</form>
+<br>
+
+<accordion>
+    <accordion-group #group *ngFor="let Vopros_na_Otvet of questions" (click)="onSelect(Vopros_na_Otvet)">
+        <div accordion-heading>
+            <div>{{Vopros_na_Otvet.Is}}
+                <i class="pull-right float-xs-right glyphicon" [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
+            </div>
+        </div>
+        <div>
+            <form #myForm="ngForm" novalidate>
+                <div *ngIf="selectedQuestion">
+                    <p>Ответы на вопрос:</p>
+                    <ul>
+                        <li>{{selectedQuestion.Ot}}</li>
+                    </ul>
+                    <input class="form-control" name="Otv" [(ngModel)]="Otv" required>
+                    <button type="button" class="btn btn-primary" [disabled]="myForm.invalid" (click)="addOtvet(Otv)">But</button>
+                </div>
+            </form>
+        </div>
+    </accordion-group>
+
+</accordion>
